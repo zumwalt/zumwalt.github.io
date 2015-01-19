@@ -252,6 +252,7 @@ module.exports = function (grunt) {
             // Copy moves asset files and directories.
             'img/**/*',
             'fonts/**/*',
+            'CNAME',
             // Like Jekyll, exclude files & folders prefixed with an underscore.
             '!**/_*{,/**}'
             // Explicitly add any files your site needs for distribution here.
