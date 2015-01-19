@@ -304,6 +304,11 @@
     position: fixed;
     padding: 30px;
     width: calc(100% - 20px);
+    pointer-events: none;
+
+    & > * {
+      pointer-events: auto;
+    }
 
     @include media-min-small {
       padding: 50px;
@@ -372,10 +377,15 @@
   .adjust {
     cursor: pointer;
     position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
 
 
     @include media-min-small {
       left: 50px;
       bottom: 50px;
+      top: auto;
+      transform: translateX(0);
     }
   }
