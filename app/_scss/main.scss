@@ -152,46 +152,38 @@
 
     // Positioning
     // --------------------------------------------------
-    %absolute-center {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
     @mixin absolute-center {
         position: absolute;
         top: 50%;
         left: 50%;
+        -moz-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
-    }
-
-
-    %horizontal-center {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
     }
 
     @mixin horizontal-center {
         position: absolute;
         left: 50%;
+        -moz-transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
         transform: translateX(-50%);
-    }
-
-    %vertical-center {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
     }
 
     @mixin vertical-center {
         position: absolute;
         top: 50%;
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
         transform: translateY(-50%);
     }
 
     @mixin transition {
+      -moz-transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
       transition: all 0.5s ease;
     }
 
