@@ -1,0 +1,1 @@
+jQuery(document).ready(function(a){"use strict";a(".adjust").on("click",function(){console.log("click!"),a("body").toggleClass("night")})});
