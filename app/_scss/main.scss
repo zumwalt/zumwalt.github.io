@@ -1,0 +1,863 @@
+//  8888888 888b     d888 8888888b.   .d88888b.  8888888b. 88888888888 .d8888b.
+//    888   8888b   d8888 888   Y88b d88P" "Y88b 888   Y88b    888    d88P  Y88b
+//    888   88888b.d88888 888    888 888     888 888    888    888    Y88b.
+//    888   888Y88888P888 888   d88P 888     888 888   d88P    888     "Y888b.
+//    888   888 Y888P 888 8888888P"  888     888 8888888P"     888        "Y88b.
+//    888   888  Y8P  888 888        888     888 888 T88b      888          "888
+//    888   888   "   888 888        Y88b. .d88P 888  T88b     888    Y88b  d88P
+//  8888888 888       888 888         "Y88888P"  888   T88b    888     "Y8888P"
+
+    @import "fonts";
+
+//  888     888     d8888 8888888b.  8888888        d8888 888888b.   888      8888888888 .d8888b.
+//  888     888    d88888 888   Y88b   888         d88888 888  "88b  888      888       d88P  Y88b
+//  888     888   d88P888 888    888   888        d88P888 888  .88P  888      888       Y88b.
+//  Y88b   d88P  d88P 888 888   d88P   888       d88P 888 8888888K.  888      8888888    "Y888b.
+//   Y88b d88P  d88P  888 8888888P"    888      d88P  888 888  "Y88b 888      888           "Y88b.
+//    Y88o88P  d88P   888 888 T88b     888     d88P   888 888    888 888      888             "888
+//     Y888P  d8888888888 888  T88b    888    d8888888888 888   d88P 888      888       Y88b  d88P
+//      Y8P  d88P     888 888   T88b 8888888 d88P     888 8888888P"  88888888 8888888888 "Y8888P"
+
+    // Colors
+    // --------------------------------------------------
+    $blue_gray_light: #bbc1c7;
+  	$blue_gray: #6a7284;
+  	$blue_gray_dark: #393d47;
+  	$blue_gray_darker: #353942;
+
+  	$red_light: #FB7560;
+  	$red: #e35b45;
+
+  	$gray_lighter: #fcfcfc;
+  	$gray_light: #ECF0F1;
+  	$gray: #c5c1cd;
+
+    $black: #222;
+    $white: #FFF;
+
+    // Media queries
+    // --------------------------------------------------
+    $bp_smaller: 480px;
+    $bp_small: 768px;
+    $bp_medium: 1024px;
+    $bp_large: 1300px;
+
+
+//  888b     d888 8888888 Y88b   d88P 8888888 888b    888  .d8888b.
+//  8888b   d8888   888    Y88b d88P    888   8888b   888 d88P  Y88b
+//  88888b.d88888   888     Y88o88P     888   88888b  888 Y88b.
+//  888Y88888P888   888      Y888P      888   888Y88b 888  "Y888b.
+//  888 Y888P 888   888      d888b      888   888 Y88b888     "Y88b.
+//  888  Y8P  888   888     d88888b     888   888  Y88888       "888
+//  888   "   888   888    d88P Y88b    888   888   Y8888 Y88b  d88P
+//  888       888 8888888 d88P   Y88b 8888888 888    Y888  "Y8888P"
+
+    // Media Queries
+    // --------------------------------------------------
+    @mixin media-min-large {
+      @media only screen and (min-width: $bp_large) {
+        @content;
+      }
+    }
+
+    @mixin media-min-medium {
+      @media only screen and (min-width: $bp_medium) {
+        @content;
+      }
+    }
+
+    @mixin media-max-medium {
+      @media only screen and (max-width: $bp_medium) {
+        @content;
+      }
+    }
+
+    @mixin media-min-small {
+      @media only screen and (min-width: $bp_small) {
+        @content;
+      }
+    }
+
+    @mixin media-max-small {
+      @media only screen and (max-width: $bp_small) {
+        @content;
+      }
+    }
+
+    @mixin media-min-smaller {
+      @media only screen and (min-width: $bp_smaller) {
+        @content;
+      }
+    }
+
+    // Clearfix
+    // --------------------------------------------------
+    %clearfix {
+      *zoom: 1;
+      &:before, &:after {
+        content: " ";
+        display: table;
+      }
+      &:after {
+        clear: both;
+      }
+    }
+
+    @mixin clearfix {
+        *zoom: 1;
+        &:before, &:after {
+          content: " ";
+          display: table;
+        }
+        &:after {
+          clear: both;
+        }
+    }
+
+    // Truncate text
+    // --------------------------------------------------
+    %truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    @mixin truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    // Unselectable
+    // --------------------------------------------------
+    @mixin unselectable {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    // Visually hidden
+    // --------------------------------------------------
+    %visuallyhidden {
+      margin: -1px;
+      padding: 0;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip: rect(0, 0, 0, 0);
+      position: absolute;
+    }
+
+    // Positioning
+    // --------------------------------------------------
+
+    @mixin absolute-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    @mixin horizontal-center {
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+
+    @mixin vertical-center {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+
+//  888888b.         d8888  .d8888b.  8888888888
+//  888  "88b       d88888 d88P  Y88b 888
+//  888  .88P      d88P888 Y88b.      888
+//  8888888K.     d88P 888  "Y888b.   8888888
+//  888  "Y88b   d88P  888     "Y88b. 888
+//  888    888  d88P   888       "888 888
+//  888   d88P d8888888888 Y88b  d88P 888
+//  8888888P" d88P     888  "Y8888P"  8888888888
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 18px;
+      height: 100%;
+    }
+
+    body {
+      color: $blue_gray_dark;
+      height: 100%;
+      font-family: "proxima-nova", "helvetica neue", helvetica, sans-serif;
+      font-size: 1rem;
+      margin: 0;
+
+      &.fixed {
+        overflow: hidden;
+      }
+    }
+
+    a {
+      color: $red;
+
+      &:hover {
+        color: $red_light;
+      }
+    }
+
+    h1 {
+      font-size: 1.388888889rem;
+
+      @include media-min-small {
+        font-size: 1.888888889rem;
+      }
+    }
+
+    h2 {
+      font-size: 1.133333333rem;
+
+      @include media-min-small {
+        font-size: 1.333333333rem;
+      }
+    }
+
+    small {
+      font-size: .777777778rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: $gray;
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 0.85rem;
+
+      @include media-min-small {
+        font-size: 1rem;
+      }
+    }
+
+
+//  888             d8888 Y88b   d88P  .d88888b.  888     888 88888888888
+//  888            d88888  Y88b d88P  d88P" "Y88b 888     888     888
+//  888           d88P888   Y88o88P   888     888 888     888     888
+//  888          d88P 888    Y888P    888     888 888     888     888
+//  888         d88P  888     888     888     888 888     888     888
+//  888        d88P   888     888     888     888 888     888     888
+//  888       d8888888888     888     Y88b. .d88P Y88b. .d88P     888
+//  88888888 d88P     888     888      "Y88888P"   "Y88888P"      888
+
+    .wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      main {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        @include media-min-small {
+          width: 150%;
+        }
+      }
+    }
+
+    section,
+    .project {
+      position: absolute;
+      height: 100%;
+      top: 0;
+      width: 100%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      
+      @include media-min-small {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        width: 33.333333333%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+
+      &.about {
+        left: 0;
+        transition: 
+          height 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+          width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+          left 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+          padding 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        z-index: 500;
+      }
+
+      &.recent-work {
+        top: 60px;
+        left: 0;
+        
+        transition: 
+          width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+          transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+          left 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        z-index: 400;
+
+        @include media-min-small {
+          top: 0;
+          left: 33.333333333%;
+        }
+      }
+
+      &.project {
+        top: 60px;
+        transition: 
+          width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+          left 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        z-index: 300;
+
+        @include media-min-small {
+          top: 0;
+          left: 66.666666667%;
+        }
+      }
+    }
+
+    main.projects-open {
+
+      .about {
+        height: 60px;
+        transition: 
+          height 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+          width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+          left 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+          padding 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+        @include media-min-small {
+          width: 100px;
+          height: 100%;
+        }
+      }
+
+      .recent-work {
+        height: calc(100% - 60px);
+        transition: 
+          width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+          transform 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+          left 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+        @include media-min-small {
+          height: 100%;
+          left: 100px;
+          width: calc(23.333333334% - 50px);
+        }
+      }
+
+      .project {
+        top: 60px;
+        height: calc(100% - 60px);
+
+        transition: 
+          width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+          left 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        
+        @include media-min-small {
+          top: 0;
+          height: 100%;
+          left: calc(23.333333334% + 50px);
+          width: calc(43.333333334% - 50px);
+        }
+      }
+    }
+
+    // Single project on mobile
+    // --------------------------------------------------
+    main.single-project {
+      .recent-work {
+        transform: translate3d(-100%,0,0);
+      }
+    }
+
+
+
+//  888b     d888  .d88888b.  8888888b.  888     888 888      8888888888 .d8888b.
+//  8888b   d8888 d88P" "Y88b 888  "Y88b 888     888 888      888       d88P  Y88b
+//  88888b.d88888 888     888 888    888 888     888 888      888       Y88b.
+//  888Y88888P888 888     888 888    888 888     888 888      8888888    "Y888b.
+//  888 Y888P 888 888     888 888    888 888     888 888      888           "Y88b.
+//  888  Y8P  888 888     888 888    888 888     888 888      888             "888
+//  888   "   888 Y88b. .d88P 888  .d88P Y88b. .d88P 888      888       Y88b  d88P
+//  888       888  "Y88888P"  8888888P"   "Y88888P"  88888888 8888888888 "Y8888P"
+
+    // About
+    // --------------------------------------------------
+    .about {
+      background: $blue_gray_dark;
+      color: $blue_gray_light;
+      padding: 30px;
+
+      @include media-min-small {
+        padding: 75px;
+      }
+
+      header {
+        height: 44px;
+        text-align: right;
+      }
+      
+      .brand {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        transition: all 1.3s ease;
+
+        @include media-min-small {
+          top: 75px;
+          left: calc((100% - 350px) / 2);
+        }
+      }
+
+      .primary-nav {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 44px;
+
+        a {
+          font-size: 0.65rem;
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          margin-left: 10px;
+
+          &.current {
+            color: $white;
+            text-decoration: none;
+          }
+        }
+
+        @include media-min-small {
+          display: none;
+        }
+      }
+
+      .content, .such-social {
+        transition: 
+          opacity 0.6s 0.9s ease,
+          filter 0s 0s linear,
+          color 0s 0s linear;
+      }
+
+      .content {
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+
+        @include media-min-small {
+          margin-top: 70px;
+        }
+      }
+
+      .such-social {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: $blue_gray_darker;
+        padding: 15px 30px;
+        text-align: center;
+
+        @include media-min-small {
+          padding: 30px 75px;
+          position: absolute;
+        }
+
+        p {
+          margin: 0;
+          line-height: 1.3;
+
+          br {
+            @include media-min-small {
+              display: none;
+            }
+          }
+        }
+
+        @include media-min-small {
+          a {
+            position: relative;
+
+            &:after {
+              color: $blue_gray_darker;
+              font-family: zumwalt;
+              position: absolute;
+              left: 50%;
+              bottom: 100%;
+              transform: translate3d(-50%,100%,0);
+              opacity: 0;
+              transition: all 0.4s ease;
+            }
+
+            &.twitter {
+              &:after {
+                content: '\e800';
+              }
+
+              &:hover {
+                color: #55acee;
+
+                &:after {
+                  color: #55acee;
+                  transform: translate3d(-50%,0,0);
+                  opacity: 1;
+                }
+              }
+            }
+
+            &.dribbble {
+              &:after {
+                content: '\e801';
+              }
+
+              &:hover {
+                color: #ec4989;
+
+                &:after {
+                  color: #ec4989;
+                  transform: translate3d(-50%,0,0);
+                  opacity: 1;
+                }
+              }
+            }
+
+            &.codepen {
+              &:after {
+                content: '\e802';
+              }
+
+              &:hover {
+                color: #caa525;
+
+                &:after {
+                  color: #caa525;
+                  transform: translate3d(-50%,0,0);
+                  opacity: 1;
+                }
+              }
+            }
+
+            &.github {
+              &:after {
+                content: '\e803';
+              }
+
+              &:hover {
+                color: #4183c5;
+
+                &:after {
+                  color: #4183c5;
+                  transform: translate3d(-50%,0,0);
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+        
+      }
+    }
+
+    .projects-open .about {
+      padding: 8px 30px;
+
+      @include media-min-small {
+        padding: 50px;
+      }
+      
+      &:hover {
+        background: darken($blue_gray_darker, 5%);
+        cursor: pointer;
+      }
+
+      header {
+
+      }
+
+      .brand {
+        top: 8px;
+        left: 30px;
+        transition: all 0.5s 0.9s ease;
+
+        @include media-min-small {
+          top: 75px;
+          left: 31px;
+        }
+      }
+
+      .content, .such-social {
+        transition: all 0.8s ease;
+        opacity: 0;
+      }
+    }
+
+    // Recent work
+    // --------------------------------------------------
+    .recent-work {
+      background: $white;
+      border-right: 1px solid $gray_light;
+
+      header {
+        padding: 3em 0;
+        text-align: center;
+      }
+
+      a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        padding: 2.5em 0;
+        border-top: 1px solid $gray_light;
+
+        .title {
+          text-decoration: underline;
+          transition: all 0.3s ease;
+          margin: 0 0 15px;
+        }
+
+        p {
+          color: $gray;
+          font-size: .888888889rem;
+          line-height: 1.25;
+          margin: 0 auto;
+          max-width: 220px;
+          transition: all 0.3s ease;
+        }
+
+        &:hover {
+          p {
+            color: $blue_gray;
+          }
+        }
+      }
+    }
+
+    .projects-open .recent-work {
+      a {
+        &.current {
+
+          @include media-min-small {
+            cursor: default;
+            background: lighten($blue_gray_light, 20%);
+            color: $blue_gray;
+            transition: all 0.4s 1.3s ease;
+
+            & > * {
+              transition: all 0.4s 1.3s ease;
+            }
+
+            .title {
+              text-decoration: none;
+            }
+
+            p {
+              color: $blue_gray;
+            }
+          }
+          
+        }
+      }
+    }
+
+    // Single project
+    // --------------------------------------------------
+    .project {
+      opacity: 0;
+      visibility: hidden;
+
+      &.open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .return {
+        background: $gray_light;
+        text-align: center;
+
+        @include media-min-small {
+          display: none;
+        }
+
+        a {
+          display: block;
+          padding: 15px;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          font-weight: 600;
+
+          &:hover {
+            background: $red;
+            color: $white;
+          }
+        }
+      }
+
+      header {
+        padding: 1.5em 20px;
+
+        @include media-min-small {
+          padding: 2.5em 75px;
+          max-width: 650px;
+          margin: 0 auto;
+        }
+
+        .title {
+          margin: 0 0 10px;
+        }
+        .description {
+          margin: 0;
+          color: $gray;
+          line-height: 1.25;
+        }
+      }
+      .content {
+        padding: 0 20px 20px;
+
+        @include media-min-small {
+          padding: 0 75px 75px;
+          max-width: 650px;
+          margin: 0 auto;
+        }
+
+        a.visit {
+          display: inline-block;
+          padding: 10px 25px;
+          border: 1px solid $red;
+          border-radius: 22px;
+          text-decoration: none;
+
+          &:hover {
+            border-color: $red_light;
+          }
+        }
+      }
+
+      .examples {
+        @include clearfix;
+
+        .example {
+          float: left;
+          position: relative;
+          width: 100%;
+
+          @include media-min-small {
+            &:not(.video):after {
+              content: '';
+              background: url('/img/zoom.svg') no-repeat center center;
+              width: 70px;
+              height: 70px;
+              @include absolute-center;
+              z-index: 10;
+              opacity: 0;
+              transition: all 0.8s ease;
+            }
+          }
+
+          &:hover {
+
+            @include media-min-small {
+              cursor: pointer;
+              &:after {
+                opacity: 0.5;
+              }
+            }
+            
+          }
+          
+          &.third {
+            width: 33.333333333%;
+          }
+          &.half {
+            width: 50%;
+          }
+
+          img {
+            display: block;
+            width: 100%;
+          }
+
+          video {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+   // Example lightbox
+   // --------------------------------------------------
+   .lightbox {
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: all 0.8s ease;
+    opacity: 0;
+    overflow: scroll;
+
+    .close {
+      background: rgba(black, 0.8);
+      padding: 20px 40px;
+      color: $white;
+      position: fixed;
+      left: 50%;
+      transform: translate(-50%,0);
+      bottom: 7%;
+      border-radius: 31px;
+    }
+
+    &.open {
+      opacity: 1;
+    }
+
+    img {
+      @include horizontal-center;
+      max-width: 100%;
+    }
+   }
+
+   .overlay {
+    background: rgba($blue_gray_darker, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99998;
+    transition: all 0.8s ease;
+    opacity: 0;
+
+    &.visible {
+      opacity: 1;
+    }
+   }
