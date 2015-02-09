@@ -1,1 +1,0 @@
-jQuery(document).ready(function(a){"use strict";a(".adjust").on("click",function(){console.log("click!"),a("body").toggleClass("night")});var b=(new Date).getHours();(5>b||b>20)&&a("body").addClass("night")});
