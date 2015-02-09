@@ -29,9 +29,6 @@
     <meta name="description" content="{{ page.description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- build:css({app,.tmp}) /css/main.css -->
-    <!-- endbuild -->
-    <!-- endbuild -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <style>
@@ -73,6 +70,9 @@
             padding: 30px;
             top: 50%;
             left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
             transform: translate(-50%,-50%);
             z-index: 2;
             max-width: 720px;
@@ -94,10 +94,6 @@
     <script src="//use.typekit.net/dpe5bsj.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
 
-    <!-- build:js(app) /js/vendor/modernizr.js -->
-    <script src="/_bower_components/modernizr/modernizr.js"></script>
-    <!-- enbuild --> 
-
   </head>
   <body>
     <!--[if lt IE 8]>
@@ -111,9 +107,6 @@
     </div>
 
     {% include googleanalytics.html %}
-    <!-- build:js({app,.tmp}) /js/script.js -->
-    <!-- endbuild -->
-    <!-- endbuild -->
 
   </body>
 </html>
