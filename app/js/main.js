@@ -24,7 +24,7 @@ jQuery(function ($) {
 		if($(window).width() < bpSmall) {
 			$('.about').css('overflow','visible');
 			$('main').removeClass('projects-open single-project');
-			$(this).siblings().removeClass('current');
+			$('a[href="#about"]').siblings().removeClass('current');
 			$(this).addClass('current');
 		}
 	});
