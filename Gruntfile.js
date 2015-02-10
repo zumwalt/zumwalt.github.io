@@ -253,6 +253,7 @@ module.exports = function (grunt) {
             'img/**/*',
             'fonts/**/*',
             'assets/**/*',
+            'CNAME',
             // Like Jekyll, exclude files & folders prefixed with an underscore.
             '!**/_*{,/**}'
             // Explicitly add any files your site needs for distribution here.
