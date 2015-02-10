@@ -368,7 +368,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('deploy', [
     'check',
-    'test',
     'build',
     'autoprefixer:dist',
     'buildcontrol'
@@ -376,7 +375,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'check',
-    'test',
     'build'
   ]);
 };
