@@ -7,25 +7,61 @@ jQuery(function ($) {
 	bpMedium = 1024;
 	bpLarge = 1300;
 
+	// How big a <main> are you?
+	// --------------------------------------------------
+	// var gucciMain = function () {
+	// 	var wWidth = $(window).width();
+	// 	if(wWidth >= bpSmall && wWidth < bpMedium) {
+	// 		$('main').width($(window).width() * 3);
+	// 	}
+	// 	if(wWidth >= bpMedium) {
+	// 		$('main').width($(window).width() * 1.5);
+	// 	}
+	// };
+
+	// $(document).ready(gucciMain);
+	// $(window).resize(gucciMain);
+	
+
 	// Show me mobile navigation, Bob!
 	// --------------------------------------------------
 	$('a[href="#recent-work"]').on('click', function (e) {
 		e.preventDefault();
-		if($(window).width() < bpSmall) {
+		e.stopPropagation();
+		if($(window).width() < bpMedium) {
 			$('main').addClass('projects-open');
 			$('.about').css('overflow','hidden');
 			$(this).siblings().removeClass('current');
 			$(this).addClass('current');
 		}
+		if($(window).width() >= bpSmall) {
+			$('.brand')
+				.addClass('blink')
+				.delay(1300)
+				.queue(function () {
+					$(this).removeClass('blink');
+					$(this).dequeue();
+				});
+		}
 	});
 
 	$('a[href="#about"], .brand a').on('click', function (e) {
 		e.preventDefault();
-		if($(window).width() < bpSmall) {
+		e.stopPropagation();
+		if($(window).width() < bpMedium) {
 			$('.about').css('overflow','visible');
 			$('main').removeClass('projects-open single-project');
 			$('a[href="#about"]').siblings().removeClass('current');
 			$('a[href="#about"]').addClass('current');
+		}
+		if($(window).width() >= bpSmall) {
+			$('.brand')
+				.addClass('blink')
+				.delay(1300)
+				.queue(function () {
+					$(this).removeClass('blink');
+					$(this).dequeue();
+				});
 		}
 	});
 
@@ -35,14 +71,21 @@ jQuery(function ($) {
 		e.preventDefault();
 		var project = $(this).attr('href');
 
-		if($(window).width() >= bpSmall) {
-			if(!$('main').hasClass('projects-open')) {
-				$('main').addClass('projects-open');
-			}
-		} else {
-			if(!$('main').hasClass('single-project')) {
-				$('main').addClass('single-project');
-			}
+		if(!$('main').hasClass('projects-open')) {
+			$('main').addClass('projects-open');
+		}
+		if(!$('main').hasClass('single-project')) {
+			$('main').addClass('single-project');
+		}
+
+		if($(window).width() >= bpMedium) {
+			$('.brand')
+				.addClass('blink')
+				.delay(1300)
+				.queue(function () {
+					$(this).removeClass('blink');
+					$(this).dequeue();
+				});
 		}
 		
 		
@@ -66,20 +109,33 @@ jQuery(function ($) {
 	$('.return a').on('click', function (e) {
 		e.preventDefault();
 
-		if($(window).width() >= bpSmall) {
+		if($(window).width() >= bpMedium) {
 			$('main').removeClass('projects-open');
 		} else {
 			$('main').removeClass('single-project');
 		}
 		
-		$('.project').removeClass('open');
 	});
 
 
 	$('.about').on('click', function () {
 		if($(window).width() >= bpSmall) {
+
 			if($('main').hasClass('projects-open')) {
-				$('main').removeClass('projects-open');
+				$('.brand')
+					.addClass('blink')
+					.delay(1300)
+					.queue(function () {
+						$(this).removeClass('blink');
+						$(this).dequeue();
+					});
+
+				$('main').removeClass('projects-open single-project');
+
+				if($('a[href="#recent-work"]').hasClass('current')) {
+					$('a[href="#recent-work"]').removeClass('current');
+					$('a[href="#about"]').addClass('current');
+				}
 
 				setTimeout(function () {
 					$('.project').removeClass('open');

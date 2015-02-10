@@ -67,7 +67,7 @@
     }
 
     @mixin media-max-medium {
-      @media only screen and (max-width: $bp_medium) {
+      @media only screen and (max-width: $bp_medium - 1) {
         @content;
       }
     }
@@ -79,7 +79,7 @@
     }
 
     @mixin media-max-small {
-      @media only screen and (max-width: $bp_small) {
+      @media only screen and (max-width: $bp_small - 1) {
         @content;
       }
     }
@@ -283,9 +283,14 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-
+        transition: transform 0.8s ease;
+        
         @include media-min-small {
-          width: 150%;
+          width: 300vw;
+        }
+
+        @include media-min-medium {
+          width: 150vw;
         }
       }
     }
@@ -301,102 +306,135 @@
       position: absolute;
       height: 100%;
       top: 0;
-      width: 100%;
+      left: 0;
+      width: 100vw;
       overflow-x: hidden;
       overflow-y: scroll;
       
-      @include media-min-small {
+      @include media-min-medium {
         position: absolute;
         height: 100%;
         top: 0;
-        width: 33.333333333%;
+        width: 50vw;
         overflow-x: hidden;
         overflow-y: scroll;
       }
 
       &.about {
-        left: 0;
-        transition: 
-          height 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000),
-          width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
-          left 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
-          padding 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
         z-index: 500;
+
+        @include media-max-small {
+          transition: 
+            height 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+            width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+            padding 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+            transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        }
       }
 
       &.recent-work {
-        top: 60px;
-        left: 0;
-        
-        transition: 
-          width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
-          transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
-          left 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
         z-index: 400;
+
+        @include media-max-small {
+          top: 60px;
+          transition: 
+            width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+            transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        }
 
         @include media-min-small {
           top: 0;
-          left: 33.333333333%;
+          transform: translate3d(100vw,0,0);
+        }
+
+        @include media-min-medium {
+          transform: translate3d(50vw,0,0);
         }
       }
 
       &.project {
-        top: 60px;
-        transition: 
-          width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
-          left 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
         z-index: 300;
 
+        @include media-max-small {
+          top: 60px;
+          transition: 
+            width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+            transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+            z-index 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+          transform: translate3d(100vw,0,0);
+        }
+        
         @include media-min-small {
           top: 0;
-          left: 66.666666667%;
+          transform: translate3d(200vw,0,0);
+        }
+
+        @include media-min-medium {
+          transform: translate3d(100vw,0,0);
         }
       }
     }
 
     main.projects-open {
+      transition: transform 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+      @include media-min-small {
+        transform: translate3d(calc(-100vw + 100px),0,0);
+      }
+
+      @include media-min-medium {
+        transform: translate3d(calc(-50vw + 100px),0,0);
+      }
 
       .about {
-        height: 60px;
-        transition: 
-          height 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000),
-          width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
-          left 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
-          padding 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-
-        @include media-min-small {
-          width: 100px;
-          height: 100%;
+        @include media-max-small {
+          height: 60px;
+          transition: all 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
         }
       }
 
       .recent-work {
-        height: calc(100% - 60px);
-        transition: 
-          width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000),
-          transform 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
-          left 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+        @include media-max-small {
+          height: calc(100vh - 60px);
+          transition: 
+            width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+            transform 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        }
 
         @include media-min-small {
-          height: 100%;
-          left: 100px;
-          width: calc(23.333333334% - 50px);
+          width: calc(100vw - 50px);
         }
+
+        @include media-min-medium {
+          transition: width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+          width: calc(50vw - 50px);
+        }
+
+
       }
 
       .project {
-        top: 60px;
-        height: calc(100% - 60px);
-
-        transition: 
-          width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
-          left 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
         
+
+        @include media-max-small {
+          top: 60px;
+          height: calc(100vh - 60px);
+          transition: 
+            width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
+            transform 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        }
+
         @include media-min-small {
-          top: 0;
-          height: 100%;
-          left: calc(23.333333334% + 50px);
-          width: calc(43.333333334% - 50px);
+          width: 100vw;
+        }
+
+        @include media-min-medium {
+          transition: 
+            width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+            transform 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+          transform: translate3d(calc(100vw - 50px),0,0);
+          width: calc(50vw - 50px);
         }
       }
     }
@@ -404,8 +442,22 @@
     // Single project on mobile
     // --------------------------------------------------
     main.single-project {
+      @include media-min-small {
+        transform: translate3d(-200vw,0,0);
+      }
+      @include media-min-medium {
+        transform: translate3d(calc(-50vw + 100px),0,0);
+      }
       .recent-work {
-        transform: translate3d(-100%,0,0);
+        @include media-max-small {
+          transform: translate3d(-100%,0,0);
+        }
+      }
+
+      .project {
+        @include media-max-small {
+          transform: translate3d(0,0,0);
+        }
       }
     }
 
@@ -434,17 +486,33 @@
       header {
         height: 44px;
         text-align: right;
+        transition: all 0.6s ease;
+
+        @include media-min-small {
+          padding-right: calc((100% - 350px) / 2);
+        }
       }
       
       .brand {
         position: absolute;
         top: 30px;
         left: 30px;
-        transition: all 1.3s ease;
+        right: auto;
 
+        &.blink {
+          animation: blink 1.3s 1 ease;
+        }
+        
+        @include media-max-small {
+          transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        }
+          
         @include media-min-small {
           top: 75px;
-          left: calc((100% - 350px) / 2);
+          right: calc(((100% - 350px) / 2) + 320px);
+          transition: 
+            left 0s 0.5s linear,
+            right 0s 0.5s linear;
         }
       }
 
@@ -452,6 +520,7 @@
         display: inline-block;
         vertical-align: middle;
         line-height: 44px;
+        transition: opacity 0.6s 0.9s ease;
 
         a {
           font-size: 0.65rem;
@@ -465,7 +534,7 @@
           }
         }
 
-        @include media-min-small {
+        @include media-min-medium {
           display: none;
         }
       }
@@ -601,7 +670,7 @@
       padding: 8px 30px;
 
       @include media-min-small {
-        padding: 50px;
+        padding: 75px 50px;
       }
       
       &:hover {
@@ -616,12 +685,25 @@
       .brand {
         top: 8px;
         left: 30px;
-        transition: all 0.5s 0.9s ease;
+        right: auto;
+
+        @include media-max-small {
+          transition: all 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        }
 
         @include media-min-small {
           top: 75px;
-          left: 31px;
+          left: auto;
+          right: 32px;
         }
+      }
+
+      .primary-nav {
+        @include media-min-small {
+          opacity: 0;
+          transition: opacity 0.8s ease;
+        }
+        
       }
 
       .content, .such-social {
@@ -643,6 +725,7 @@
 
       a {
         display: block;
+        cursor: pointer;
         text-align: center;
         text-decoration: none;
         padding: 2.5em 0;
@@ -675,7 +758,7 @@
       a {
         &.current {
 
-          @include media-min-small {
+          @include media-min-medium {
             cursor: default;
             background: lighten($blue_gray_light, 20%);
             color: $blue_gray;
@@ -701,19 +784,17 @@
     // Single project
     // --------------------------------------------------
     .project {
-      opacity: 0;
-      visibility: hidden;
+      background: $white;
 
       &.open {
-        opacity: 1;
-        visibility: visible;
+        z-index: 301;
       }
 
       .return {
         background: $gray_light;
         text-align: center;
 
-        @include media-min-small {
+        @include media-min-medium {
           display: none;
         }
 
@@ -920,4 +1001,9 @@
       transform: scale(1.4);
       opacity: 0;
     }
+  }
+
+  @keyframes blink {
+    0%,100% {opacity: 1}
+    20%,80% {opacity: 0}
   }
