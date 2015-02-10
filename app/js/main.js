@@ -11,18 +11,22 @@ jQuery(function ($) {
 	// --------------------------------------------------
 	$('a[href="#recent-work"]').on('click', function (e) {
 		e.preventDefault();
-		$('main').addClass('projects-open');
-		$('.about').css('overflow','hidden');
-		$(this).siblings().removeClass('current');
-		$(this).addClass('current');
+		if($(window).width() >= bpSmall) {
+			$('main').addClass('projects-open');
+			$('.about').css('overflow','hidden');
+			$(this).siblings().removeClass('current');
+			$(this).addClass('current');
+		}
 	});
 
-	$('a[href="#about"]').on('click', function (e) {
+	$('a[href="#about"], .brand a').on('click', function (e) {
 		e.preventDefault();
-		$('.about').css('overflow','visible');
-		$('main').removeClass('projects-open single-project');
-		$(this).siblings().removeClass('current');
-		$(this).addClass('current');
+		if($(window).width() >= bpSmall) {
+			$('.about').css('overflow','visible');
+			$('main').removeClass('projects-open single-project');
+			$(this).siblings().removeClass('current');
+			$(this).addClass('current');
+		}
 	});
 
 	// Divin' into a project
