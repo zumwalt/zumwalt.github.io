@@ -40,7 +40,9 @@
     $bp_smaller: 480px;
     $bp_small: 768px;
     $bp_medium: 1024px;
-    $bp_large: 1300px;
+    $bp_large: 1440px;
+    $bp_xlarge: 1680px;
+    $bp_huge: 2000px;
 
 
 //  888b     d888 8888888 Y88b   d88P 8888888 888b    888  .d8888b.
@@ -54,6 +56,18 @@
 
     // Media Queries
     // --------------------------------------------------
+    @mixin media-min-huge {
+      @media only screen and (min-width: $bp_huge) {
+        @content;
+      }
+    }
+
+    @mixin media-min-xlarge {
+      @media only screen and (min-width: $bp_xlarge) {
+        @content;
+      }
+    }
+
     @mixin media-min-large {
       @media only screen and (min-width: $bp_large) {
         @content;
@@ -200,6 +214,14 @@
     html {
       font-size: 18px;
       height: 100%;
+
+      @include media-min-xlarge {
+        font-size: 21px;
+      }
+
+      @include media-min-huge {
+        font-size: 24px;
+      }
     }
 
     body {
@@ -514,6 +536,10 @@
             left 0s 0.5s linear,
             right 0s 0.5s linear;
         }
+
+        @include media-min-huge {
+          right: calc(((100% - 450px) / 2) + 420px);
+        }
       }
 
       .primary-nav {
@@ -554,6 +580,10 @@
 
         @include media-min-small {
           margin-top: 70px;
+        }
+
+        @include media-min-huge {
+          max-width: 450px;
         }
       }
 
