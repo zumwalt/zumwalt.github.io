@@ -11,7 +11,7 @@ jQuery(function ($) {
 	// --------------------------------------------------
 	$('a[href="#recent-work"]').on('click', function (e) {
 		e.preventDefault();
-		if($(window).width() >= bpSmall) {
+		if($(window).width() < bpSmall) {
 			$('main').addClass('projects-open');
 			$('.about').css('overflow','hidden');
 			$(this).siblings().removeClass('current');
@@ -21,7 +21,7 @@ jQuery(function ($) {
 
 	$('a[href="#about"], .brand a').on('click', function (e) {
 		e.preventDefault();
-		if($(window).width() >= bpSmall) {
+		if($(window).width() < bpSmall) {
 			$('.about').css('overflow','visible');
 			$('main').removeClass('projects-open single-project');
 			$(this).siblings().removeClass('current');
