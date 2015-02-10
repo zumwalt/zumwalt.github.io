@@ -12,12 +12,14 @@ jQuery(function ($) {
 	$('a[href="#recent-work"]').on('click', function (e) {
 		e.preventDefault();
 		$('main').addClass('projects-open');
+		$('.about').css('overflow','hidden');
 		$(this).siblings().removeClass('current');
 		$(this).addClass('current');
 	});
 
 	$('a[href="#about"]').on('click', function (e) {
 		e.preventDefault();
+		$('.about').css('overflow','visible');
 		$('main').removeClass('projects-open single-project');
 		$(this).siblings().removeClass('current');
 		$(this).addClass('current');
