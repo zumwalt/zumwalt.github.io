@@ -46,7 +46,14 @@ jQuery(function ($) {
 			$(project).siblings().removeClass('open');
 			$(project).addClass('open');
 		}
+
+		// Load images
+		// --------------------------------------------------
+		$(project).find('img').each(function () {
+			$(this).attr('src', $(this).data('src'));
+		});
 	});
+
 
 	// Close a project
 	// --------------------------------------------------
@@ -84,33 +91,43 @@ jQuery(function ($) {
 			e.preventDefault();
 
 			if($(window).width() >= bpSmall) {
+
 				var src = $('img', this).attr('src'),
-					full = $('img', this).attr('data-full');
-				$('body').addClass('fixed');
-				$('<div class="overlay">').insertAfter($('main'));
+					full = $('img', this).attr('data-full')
+			    	image = new Image();
 
-				if(full) {
-					$('<div class="lightbox"><img src="'+full+'"/><div class="close">Click anywhere to close</div></div>').insertAfter($('main'));
-				} else {
-					$('<div class="lightbox"><img src="'+src+'"/><div class="close">Click anywhere to close</div></div>').insertAfter($('main'));
-				}
+			    $('body').addClass('fixed');
+				$('<div class="overlay"><div class="loading"></div></div><div class="lightbox"></div>').insertAfter($('.wrapper'));
 
-				setTimeout(function () {
-					$('.overlay').addClass('visible');
-					$('.lightbox').addClass('open');
-				}, 100);
+			   	if(full) {
+			   		image.src = full;
+			   	} else {
+			   		image.src = src;
+			   	}
+			    
+			    image.onload = function () {
+			        $('.lightbox').empty().append(image);
+			        setTimeout(function () {
+						$('.lightbox').addClass('open');
+					}, 300);
+			    };
+			    image.onerror = function () {
+			        $('.lightbox').empty().html('That image is not available.');
+			    }				
+
+			    return false;
 			}
 			
 		});
 	});
 	$(document).on('click', '.lightbox', function () {
 		$('body').removeClass('fixed');
-		$('.lightbox').css('opacity', 0);
+		$('.lightbox').removeClass('open');
 		$('.overlay').css('opacity', 0);
 		setTimeout(function () {
 			$('.overlay').remove();
 			$('.lightbox').remove();
-		}, 500);
+		}, 600);
 	});
 
 	// Preboardin'

@@ -1,4 +1,3 @@
-// Generated on 2015-02-07 using generator-jekyllrb 1.2.1
 'use strict';
 
 // Directory reference:
@@ -247,19 +246,11 @@ module.exports = function (grunt) {
           dot: true,
           cwd: '<%= yeoman.app %>',
           src: [
-            // Jekyll processes and moves HTML and text files.
-            // Usemin moves CSS and javascript inside of Usemin blocks.
-            // Copy moves asset files and directories.
             'img/**/*',
             'fonts/**/*',
             'assets/**/*',
             'CNAME',
-            // Like Jekyll, exclude files & folders prefixed with an underscore.
             '!**/_*{,/**}'
-            // Explicitly add any files your site needs for distribution here.
-            //'_bower_components/jquery/jquery.js',
-            //'favicon.ico',
-            //'apple-touch*.png'
           ],
           dest: '<%= yeoman.dist %>'
         }]
@@ -356,13 +347,6 @@ module.exports = function (grunt) {
     grunt.task.run(['serve']);
   });
 
-  // No real tests yet. Add your own.
-  grunt.registerTask('test', [
-  //   'clean:server',
-  //   'concurrent:test',
-  //   'connect:test'
-  ]);
-
   grunt.registerTask('check', [
     'clean:server',
     'jekyll:check',
@@ -371,7 +355,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean',
-    // Jekyll cleans files from the target directory, so must run first
     'jekyll:dist',
     'concurrent:dist',
     'useminPrepare',
