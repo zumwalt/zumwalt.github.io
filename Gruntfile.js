@@ -385,6 +385,7 @@ module.exports = function (grunt) {
     'check',
     'test',
     'build',
+    'autoprefixer:dist',
     'buildcontrol'
     ]);
 
