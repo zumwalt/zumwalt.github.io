@@ -108,6 +108,7 @@ jQuery(function ($) {
 			    image.onload = function () {
 			        $('.lightbox').empty().append(image);
 			        setTimeout(function () {
+			        	$('.overlay .loading').css('opacity', 0);
 						$('.lightbox').addClass('open');
 					}, 300);
 			    };
