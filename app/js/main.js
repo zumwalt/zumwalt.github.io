@@ -25,7 +25,7 @@ jQuery(function ($) {
 			$('.about').css('overflow','visible');
 			$('main').removeClass('projects-open single-project');
 			$('a[href="#about"]').siblings().removeClass('current');
-			$(this).addClass('current');
+			$('a[href="#about"]').addClass('current');
 		}
 	});
 
