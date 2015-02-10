@@ -89,12 +89,12 @@ jQuery(function ($) {
 	$('.example').each(function () {
 		$(this).on('click', function (e) {
 			e.preventDefault();
+			var src = $('img', this).attr('src'),
+				full = $('img', this).attr('data-full');
 
 			if($(window).width() >= bpSmall) {
 
-				var src = $('img', this).attr('src'),
-					full = $('img', this).attr('data-full')
-			    	image = new Image();
+				var image = new Image();
 
 			    $('body').addClass('fixed');
 				$('<div class="overlay"><div class="loading"></div></div><div class="lightbox"></div>').insertAfter($('.wrapper'));
@@ -118,7 +118,12 @@ jQuery(function ($) {
 
 			    return false;
 			} else {
-				var url = $('img', this).attr('data-full');
+				var url;
+				if(full) {
+					url = full;
+				} else {
+					url = src;
+				}
 				window.open(url, '_blank');
 			}
 			
