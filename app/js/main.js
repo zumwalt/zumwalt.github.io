@@ -117,6 +117,9 @@ jQuery(function ($) {
 			    }				
 
 			    return false;
+			} else {
+				var url = $('img', this).attr('data-full');
+				window.open(url, '_blank');
 			}
 			
 		});
