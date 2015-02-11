@@ -7,34 +7,119 @@ jQuery(function ($) {
 	bpMedium = 1024;
 	bpLarge = 1300;
 
-	// How big a <main> are you?
+	// Routin'
 	// --------------------------------------------------
-	// var gucciMain = function () {
-	// 	var wWidth = $(window).width();
-	// 	if(wWidth >= bpSmall && wWidth < bpMedium) {
-	// 		$('main').width($(window).width() * 3);
-	// 	}
-	// 	if(wWidth >= bpMedium) {
-	// 		$('main').width($(window).width() * 1.5);
-	// 	}
-	// };
+	var currentUrl = window.location.href,
+		segments = currentUrl.replace(/\/\s*$/,'').split('/'),
+		pages = new Array();
 
-	// $(document).ready(gucciMain);
-	// $(window).resize(gucciMain);
-	
+	segments.shift();
+
+	// Get possible pages, add to array
+	$('.project').each(function () {
+		var id = $(this).attr('id');
+		pages.push('#'+id);
+	});
+
+	if(segments[3] === '#about') {
+		if($('main').hasClass('projects-open single-project')) {
+			$('main').removeClass('projects-open single-project');
+		}
+	}
+	if(segments[3] === '#recent-work') {
+		if($(window).width() < bpMedium) {
+			if(!$('main').hasClass('projects-open')) {
+				$('main').addClass('projects-open');
+			}
+			if($('main').hasClass('single-project')) {
+				$('main').removeClass('single-project');
+			}
+		} else {
+			if($('main').hasClass('projects-open single-project')) {
+				$('main').removeClass('projects-open single-project');
+			}
+		}
+		
+		
+	}
+	if(segments[4]) {
+		var project = segments[4];
+		if(!$('main').hasClass('projects-open single-project')) {
+			$('main').addClass('projects-open single-project');
+		}
+		if(!$(project).hasClass('open')) {
+			$(project).addClass('open');
+		}
+
+		// Load images
+		// --------------------------------------------------
+		$(project).find('img').each(function () {
+			$(this).attr('src', $(this).data('src'));
+		});
+	}
+
+	// On hashchange
+	// --------------------------------------------------
+
+	$(window).on('hashchange', function () {
+		currentUrl = window.location.href;
+		segments = currentUrl.replace(/\/\s*$/,'').split('/');
+
+		segments.shift();
+
+		if(!segments[3]) {
+			if($('main').hasClass('projects-open single-project')) {
+				$('main').removeClass('projects-open single-project');
+			}
+		}
+
+		if(segments[3] === '#about') {
+			if($('main').hasClass('projects-open single-project')) {
+				$('main').removeClass('projects-open single-project');
+			}
+		}
+		if(segments[3] === '#recent-work') {
+			if($(window).width() < bpMedium) {
+				if(!$('main').hasClass('projects-open')) {
+					$('main').addClass('projects-open');
+				}
+				if($('main').hasClass('single-project')) {
+					$('main').removeClass('single-project');
+				}
+			}
+		}
+		if(segments[4]) {
+			var project = segments[4];
+			if(!$('main').hasClass('projects-open single-project')) {
+				$('main').addClass('projects-open single-project');
+			}
+			if(!$(project).hasClass('open')) {
+				$(project).addClass('open');
+			}
+
+			// Load images
+			// --------------------------------------------------
+			$(project).find('img').each(function () {
+				$(this).attr('src', $(this).data('src'));
+			});
+		}
+	});
 
 	// Show me mobile navigation, Bob!
 	// --------------------------------------------------
 	$('a[href="#recent-work"]').on('click', function (e) {
 		e.preventDefault();
 		e.stopPropagation();
+		
 		if($(window).width() < bpMedium) {
+			window.location.hash = '#recent-work';
 			$('main').addClass('projects-open');
 			$('.about').css('overflow','hidden');
 			$(this).siblings().removeClass('current');
 			$(this).addClass('current');
 		}
 		if($(window).width() >= bpSmall) {
+			window.location.hash = '';
 			$('.brand')
 				.addClass('blink')
 				.delay(1300)
@@ -48,6 +133,7 @@ jQuery(function ($) {
 	$('a[href="#about"], .brand a').on('click', function (e) {
 		e.preventDefault();
 		e.stopPropagation();
+		window.location.hash = '#about';
 		if($(window).width() < bpMedium) {
 			$('.about').css('overflow','visible');
 			$('main').removeClass('projects-open single-project');
@@ -70,6 +156,8 @@ jQuery(function ($) {
 	$('.projects a').on('click', function (e) {
 		e.preventDefault();
 		var project = $(this).attr('href');
+
+		window.location.hash = '#recent-work/'+project;
 
 		if(!$('main').hasClass('projects-open')) {
 			$('main').addClass('projects-open');
@@ -110,8 +198,10 @@ jQuery(function ($) {
 		e.preventDefault();
 
 		if($(window).width() >= bpMedium) {
+			window.location.hash = '';
 			$('main').removeClass('projects-open');
 		} else {
+			window.location.hash = '#recent-work';
 			$('main').removeClass('single-project');
 		}
 		
@@ -119,6 +209,13 @@ jQuery(function ($) {
 
 
 	$('.about').on('click', function () {
+		
+		if($(window).width() >= bpMedium) {
+			window.location.hash = '';
+		} else {
+			window.location.hash = '#recent-work';
+		}
+
 		if($(window).width() >= bpSmall) {
 
 			if($('main').hasClass('projects-open')) {
