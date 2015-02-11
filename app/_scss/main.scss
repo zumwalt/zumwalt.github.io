@@ -596,6 +596,14 @@
         padding: 15px 30px;
         text-align: center;
 
+        @media only screen and (max-height: 568px) {
+          background: transparent;
+          position: relative;
+          margin-top: 2em;
+          text-align: left;
+          padding: 0;
+        }
+
         @include media-min-small {
           padding: 30px 75px;
           position: absolute;
