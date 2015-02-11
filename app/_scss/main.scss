@@ -418,7 +418,7 @@
       .recent-work {
 
         @include media-max-small {
-          height: calc(100vh - 60px);
+          height: calc(100% - 60px);
           transition: 
             width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000),
             transform 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
@@ -441,7 +441,7 @@
 
         @include media-max-small {
           top: 60px;
-          height: calc(100vh - 60px);
+          height: calc(100% - 60px);
           transition: 
             width 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000), 
             transform 0.8s 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
@@ -698,18 +698,15 @@
 
     .projects-open .about {
       padding: 8px 30px;
+      overflow-y: hidden;
 
       @include media-min-small {
         padding: 75px 50px;
-      }
-      
-      &:hover {
-        background: darken($blue_gray_darker, 5%);
-        cursor: pointer;
-      }
 
-      header {
-
+        &:hover {
+          background: darken($blue_gray_darker, 5%);
+          cursor: pointer;
+        }
       }
 
       .brand {
@@ -785,6 +782,7 @@
     }
 
     .projects-open .recent-work {
+      z-index: 600;
       a {
         &.current {
 

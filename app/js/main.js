@@ -114,12 +114,12 @@ jQuery(function ($) {
 		if($(window).width() < bpMedium) {
 			window.location.hash = '#recent-work';
 			$('main').addClass('projects-open');
-			$('.about').css('overflow','hidden');
 			$(this).siblings().removeClass('current');
 			$(this).addClass('current');
 		}
 		if($(window).width() >= bpSmall) {
 			window.location.hash = '';
+
 			$('.brand')
 				.addClass('blink')
 				.delay(1300)
@@ -135,7 +135,6 @@ jQuery(function ($) {
 		e.stopPropagation();
 		window.location.hash = '#about';
 		if($(window).width() < bpMedium) {
-			$('.about').css('overflow','visible');
 			$('main').removeClass('projects-open single-project');
 			$('a[href="#about"]').siblings().removeClass('current');
 			$('a[href="#about"]').addClass('current');
@@ -167,13 +166,15 @@ jQuery(function ($) {
 		}
 
 		if($(window).width() >= bpMedium) {
-			$('.brand')
-				.addClass('blink')
-				.delay(1300)
-				.queue(function () {
-					$(this).removeClass('blink');
-					$(this).dequeue();
-				});
+			if(!$('main').hasClass('projects-open')) {
+				$('.brand')
+					.addClass('blink')
+					.delay(1300)
+					.queue(function () {
+						$(this).removeClass('blink');
+						$(this).dequeue();
+					});
+			}
 		}
 		
 		
@@ -210,10 +211,12 @@ jQuery(function ($) {
 
 	$('.about').on('click', function () {
 		
-		if($(window).width() >= bpMedium) {
-			window.location.hash = '';
-		} else {
-			window.location.hash = '#recent-work';
+		if($('main').hasClass('projects-open')) {
+			if($(window).width() >= bpMedium) {
+				window.location.hash = '';
+			} else {
+				window.location.hash = '#recent-work';
+			}
 		}
 
 		if($(window).width() >= bpSmall) {
