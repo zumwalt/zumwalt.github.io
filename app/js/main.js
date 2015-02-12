@@ -6,6 +6,7 @@ jQuery(function ($) {
 	bpSmall = 768;
 	bpMedium = 1024;
 	bpLarge = 1300;
+	bpHuge = 2000;
 
 	// Routin'
 	// --------------------------------------------------
@@ -215,6 +216,49 @@ jQuery(function ($) {
 		$(project).find('img').each(function () {
 			$(this).attr('src', $(this).data('src'));
 		});
+
+		// Load flexslider
+		// --------------------------------------------------
+		console.log("loading slideshows, if applicable.");
+		if($(project).find('.slideshow')) {
+			console.log('run the slideshows');
+			$(project).find('.slideshow').each(function () {
+			
+
+				// Slide that junt
+				// ------------------------------------------
+				$(this).flexslider({
+					slideshow: false,
+					animation: "slide",
+					prevText: "",
+					nextText: "",   
+				});
+
+				if($(window).width() >= bpHuge) {
+					$(this).imagesLoaded(function () {
+						$(this).width($(this).find('li:first-child img').width());
+					});
+				}
+			
+			});
+		} else {
+			console.log('no slideshows found');
+		}
+		
+	});
+
+	// Resize slideshows
+	// --------------------------------------------------
+	$(window).resize(function () {
+		if($(window).width() >= bpHuge) {
+			$('.slideshow').each(function () {
+				$(this).width($(this).find('li:first-child img').width());
+			});
+		} else {
+			$('.slideshow').each(function () {
+				$(this).removeAttr('style');
+			});
+		}
 	});
 
 
@@ -270,25 +314,7 @@ jQuery(function ($) {
 		}
 	});
 
-	// Slide that junt
-	// --------------------------------------------------
-	$('.slideshow').each(function () {
-		$(this).flexslider({
-			slideshow: false,
-			animation: "slide",
-			prevText: "",
-			nextText: "",   
-		});
-
-		$(this).imagesLoaded(function () {
-			$(this).width($(this).find('li:first-child img').width());
-		});
-		
-
-		$(window).resize(function () {
-			$(this).width($(this).find('li:first-child img').width());
-		});
-	});
+	
 
 
 	// Lightbox

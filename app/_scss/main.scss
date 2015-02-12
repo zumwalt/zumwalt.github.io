@@ -272,6 +272,22 @@
       }
     }
 
+    .show-mobile {
+      display: block;
+    }
+
+    .no-touch .show-mobile {
+      display: none;
+    }
+
+    .show-desktop {
+      display: block;
+    }
+
+    .touch .show-desktop {
+      display: none;
+    }
+
 
 //  888             d8888 Y88b   d88P  .d88888b.  888     888 88888888888
 //  888            d88888  Y88b d88P  d88P" "Y88b 888     888     888
@@ -903,8 +919,14 @@
           }
         }
 
-        img {
-          max-width: 100%;
+        > img {
+          width: 120%;
+          @include horizontal-center;
+          position: relative;
+          
+          @include media-min-large {
+            max-width: 100%;
+          }
         }
       }
 
@@ -924,9 +946,13 @@
         text-align: center;
         margin-top: 10px;
         font-size: 0.75rem;
+
+        span {
+          display: inline;
+        }
       }
 
-      footer {
+      .footnotes {
         padding: 20px;
 
         @include media-min-small {
@@ -939,8 +965,29 @@
         }
       }
 
+      footer {
+        padding: 20px;
+
+        @include media-min-small {
+          padding: 75px;
+        }
+        @include media-min-medium {
+          display: none;
+        }
+      }
+
       .moodboard {
+        width: 120%;
+        @include horizontal-center;
         position: relative;
+        
+        @include media-min-large {
+          max-width: 100%;
+        }
+
+        img {
+          max-width: 100%;
+        }
 
         .heatmap {
           position: absolute;
