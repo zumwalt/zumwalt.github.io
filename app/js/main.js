@@ -195,7 +195,7 @@ jQuery(function ($) {
 			if(!$('main').hasClass('projects-open')) {
 				$('.brand')
 					.addClass('blink')
-					.delay(1300)
+					.delay(1600)
 					.queue(function () {
 						$(this).removeClass('blink');
 						$(this).dequeue();
@@ -208,7 +208,10 @@ jQuery(function ($) {
 			$('.projects a[href="'+project+'"]').siblings().removeClass('current');
 			$('.projects a[href="'+project+'"]').addClass('current');
 			$(project).siblings().removeClass('open');
-			$(project).addClass('open');
+			setTimeout(function () {
+				$(project).addClass('open');
+			}, 1300);
+			
 		}
 
 		// Load images
