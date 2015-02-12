@@ -555,6 +555,10 @@
             right 0s 0.5s linear;
         }
 
+        @include media-min-medium {
+          pointer-events: none;
+        }
+
         @include media-min-huge {
           right: calc(((100% - 450px) / 2) + 420px);
         }
