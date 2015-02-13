@@ -211,9 +211,15 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
     html {
       font-size: 18px;
-      height: 100%;
 
       @include media-min-xlarge {
         font-size: 21px;
@@ -227,10 +233,8 @@
     body {
       background: darken($blue_gray_darker, 10%);
       color: $blue_gray_dark;
-      height: 100%;
       font-family: "proxima-nova", "helvetica neue", helvetica, sans-serif;
       font-size: 1rem;
-      margin: 0;
 
       &.fixed {
         overflow: hidden;
@@ -242,14 +246,6 @@
 
       &:hover {
         color: $red_light;
-      }
-    }
-
-    h1 {
-      font-size: 1.388888889rem;
-
-      @include media-min-small {
-        font-size: 1.888888889rem;
       }
     }
 
@@ -900,7 +896,7 @@
       }
 
       header {
-        padding: 1.5em 20px;
+        padding: 2.5em 20px 1.5em;
 
         @include media-min-small {
           padding: 100px 75px 1.5em;
@@ -914,6 +910,15 @@
 
         .title {
           margin: 0 0 10px;
+          font-size: 1.3rem;
+
+          @include media-min-smaller {
+            font-size: 2rem;
+          }
+
+          @include media-min-small {
+            font-size: 2.5rem;
+          }
         }
         .description {
           margin: 0;
@@ -932,6 +937,14 @@
 
         @include media-min-large {
           max-width: 70%;
+        }
+
+        h3 {
+          font-size: 1.05rem;
+
+          @include media-min-small {
+            font-size: 1.2rem;
+          }
         }
 
         a.visit {
@@ -1085,40 +1098,38 @@
   // Slideshows
   // --------------------------------------------------
   .slideshow {
-    max-width: 100%;
     margin: 0 auto;
     position: relative;
-    
+
 
     @include media-min-huge {
       max-width: 1200px;
-      max-height: 60vh;
-      width: auto;
-      height: 100%;
+      margin: 0 auto;
     }
 
     .flex-viewport {
+      position: relative;
       height: 100%;
-      width: 100%;
+      max-height: 70vh;
     }
 
     .slides {
       list-style: none outside none;
       padding: 0;
       margin: 0;
-      height: 100%;
       @include clearfix;
 
       li {
-        height: 100%;
-        width: 100%;
+        max-height: 70vh;
+        position: relative;
+        text-align: center;
       }
 
       img {
-        display: block;
-        margin: 0 auto;
         max-width: 100%;
-        max-height: 100%;
+        max-height: 70vh;
+        height: auto;
+        width: auto;
       }
     }
 

@@ -8,11 +8,20 @@ jQuery(function ($) {
 	bpLarge = 1300;
 	bpHuge = 2000;
 
-	// Comment!
+	// Putting the fun in functions
 	// --------------------------------------------------
-	jQuery.fn.scrollTo = function(elem) { 
+	$.fn.scrollTo = function(elem) { 
 	    $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top); 
 	    return this; 
+	};
+
+	$.fn.slideshow = function () {
+		this.flexslider({
+			slideshow: false,
+			animation: "slide",
+			prevText: "",
+			nextText: "",   
+		});
 	};
 
 	// Routin'
@@ -217,6 +226,7 @@ jQuery(function ($) {
 			$(project).siblings().removeClass('open');
 			setTimeout(function () {
 				$(project).addClass('open');
+				$(project).find('.slideshow').slideshow();
 			}, 1300);
 			
 		}
@@ -226,35 +236,6 @@ jQuery(function ($) {
 		$(project).find('img').each(function () {
 			$(this).attr('src', $(this).data('src'));
 		});
-
-		// Load flexslider
-		// --------------------------------------------------
-		console.log("loading slideshows, if applicable.");
-		if($(project).find('.slideshow')) {
-			console.log('run the slideshows');
-			$(project).find('.slideshow').each(function () {
-			
-
-				// Slide that junt
-				// ------------------------------------------
-				$(this).flexslider({
-					slideshow: false,
-					animation: "slide",
-					prevText: "",
-					nextText: "",   
-				});
-
-				if($(window).width() >= bpHuge) {
-					$(this).imagesLoaded(function () {
-						$(this).width($(this).find('li:first-child img').width());
-					});
-				}
-			
-			});
-		} else {
-			console.log('no slideshows found');
-		}
-		
 	});
 
 	// Footnotes
@@ -265,21 +246,6 @@ jQuery(function ($) {
 		var destination = $(this).attr('href');
 		project.scrollTo($(destination));
 	});
-
-	// Resize slideshows
-	// --------------------------------------------------
-	$(window).resize(function () {
-		if($(window).width() >= bpHuge) {
-			$('.slideshow').each(function () {
-				$(this).width($(this).find('li:first-child img').width());
-			});
-		} else {
-			$('.slideshow').each(function () {
-				$(this).removeAttr('style');
-			});
-		}
-	});
-
 
 	// Close a project
 	// --------------------------------------------------
@@ -333,7 +299,6 @@ jQuery(function ($) {
 		}
 	});
 
-	
 
 
 	// Lightbox
