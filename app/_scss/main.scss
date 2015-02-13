@@ -653,6 +653,11 @@
         }
 
         @include media-min-small {
+          
+          br {
+            display: none;
+          }
+
           a {
             position: relative;
 
