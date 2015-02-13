@@ -8,6 +8,13 @@ jQuery(function ($) {
 	bpLarge = 1300;
 	bpHuge = 2000;
 
+	// Comment!
+	// --------------------------------------------------
+	jQuery.fn.scrollTo = function(elem) { 
+	    $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top); 
+	    return this; 
+	};
+
 	// Routin'
 	// --------------------------------------------------
 		// var currentUrl = window.location.href,
@@ -248,6 +255,15 @@ jQuery(function ($) {
 			console.log('no slideshows found');
 		}
 		
+	});
+
+	// Footnotes
+	// --------------------------------------------------
+	$('.footnote, .reference').on('click', function (e) {
+		e.preventDefault();
+		var project = $(this).parents('.project');
+		var destination = $(this).attr('href');
+		project.scrollTo($(destination));
 	});
 
 	// Resize slideshows
