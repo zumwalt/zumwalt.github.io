@@ -621,6 +621,38 @@
         }
       }
 
+      hr {
+        border: 1px solid $blue_gray;
+        width: 200px;
+      }
+
+      .contact {
+        margin-top: 2em;
+        padding-top: 2em;
+        position: relative;
+
+        &:before {
+          content: '';
+          display: block;
+          width: 50px;
+          height: 2px;
+          background: lighten($blue_gray_dark, 10%);
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        a {
+          display: block;
+          margin: 0 0 5px;
+
+          &.phone {
+            color: $blue_gray_light;
+            text-decoration: none;
+          }
+        }
+      }
+
       .such-social {
         position: fixed;
         bottom: 0;
