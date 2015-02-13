@@ -1098,6 +1098,7 @@
       padding: 0;
       margin: 0;
       height: 100%;
+      @include clearfix;
 
       li {
         height: 100%;
