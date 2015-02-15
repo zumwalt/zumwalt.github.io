@@ -191,6 +191,10 @@ jQuery(function ($) {
 	$('.projects a, .up-next a').on('click', function (e) {
 		e.preventDefault();
 		var project = $(this).attr('href');
+		var title = $(project).find('header h2').text();
+
+		// Track those events
+		ga('send', 'event', 'project', 'click', title);
 
 		//window.location.hash = '#recent-work/'+project;
 
