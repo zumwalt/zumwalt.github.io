@@ -888,8 +888,8 @@
       }
     }
 
-    // Single project
-    // --------------------------------------------------
+  // Single project
+  // --------------------------------------------------
     .project {
       background: $white;
       opacity: 0;
@@ -1173,6 +1173,14 @@
       }
     }
 
+  // Individual projects
+  // --------------------------------------------------
+    #crossbrowsertesting {
+      .picker {
+        border: 1px solid $gray_light;
+      }
+    }
+
   // Slideshows
   // --------------------------------------------------
   .slideshow {
@@ -1329,9 +1337,9 @@
     }
   }
 
-   // Example lightbox
-   // --------------------------------------------------
-   .lightbox {
+  // Example lightbox
+  // --------------------------------------------------
+  .lightbox {
     position: fixed;
     z-index: 99999;
     width: 100%;
