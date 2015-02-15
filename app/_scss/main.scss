@@ -599,18 +599,15 @@
         }
       }
 
-      .content, .such-social {
-        transition: 
-          opacity 0.6s 0.9s ease,
-          filter 0s 0s linear,
-          color 0s 0s linear;
-      }
-
       .content {
         max-width: 350px;
         margin-left: auto;
         margin-right: auto;
         margin-top: 40px;
+        transition: 
+          opacity 0.6s 0.9s ease,
+          filter 0s 0s linear,
+          color 0s 0s linear;
 
         @include media-min-small {
           margin-top: 70px;
@@ -630,6 +627,7 @@
         margin-top: 2em;
         padding-top: 2em;
         position: relative;
+        @include clearfix;
 
         &:before {
           content: '';
@@ -644,7 +642,9 @@
 
         a {
           display: block;
-          margin: 0 0 5px;
+          float: left;
+          margin: 0px;
+          clear: both;
 
           &.phone {
             color: $blue_gray_light;
@@ -654,29 +654,10 @@
       }
 
       .such-social {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: $blue_gray_darker;
-        padding: 15px 30px;
-        text-align: center;
+        margin-top: 2em;
 
         span {
           display: block;
-        }
-
-        @media only screen and (max-height: 667px) {
-          background: transparent;
-          position: relative;
-          margin-top: 2em;
-          text-align: left;
-          padding: 0;
-        }
-
-        @include media-min-small {
-          padding: 30px 75px;
-          position: absolute;
         }
 
         p {
@@ -942,14 +923,15 @@
 
         .title {
           margin: 0 0 10px;
-          font-size: 1.3rem;
+          font-size: 1.4rem;
+          line-height: 1;
 
           @include media-min-smaller {
-            font-size: 2rem;
+            font-size: 2.2rem;
           }
 
           @include media-min-small {
-            font-size: 2.5rem;
+            font-size: 3rem;
           }
         }
         .description {
@@ -962,7 +944,7 @@
         padding: 20px;
 
         @include media-min-small {
-          padding: 75px;
+          padding: 40px 75px;
           max-width: 650px;
           margin: 0 auto;
         }
@@ -972,10 +954,18 @@
         }
 
         h3 {
-          font-size: 1.05rem;
+          font-size: 1.3rem;
 
           @include media-min-small {
-            font-size: 1.2rem;
+            font-size: 1.75rem;
+          }
+        }
+
+        h4 {
+          font-size: 1.1rem;
+
+          @include media-min-small {
+            font-size: 1.3rem;
           }
         }
 
@@ -1078,18 +1068,25 @@
 
       .examples {
         @include clearfix;
+        margin-bottom: 2em;
 
-        .example {
-          float: left;
-          position: relative;
-          width: 100%;
-
+        h3 {
+          text-align: center;
+        }
+        
+        .slide {
           @include media-min-small {
-            &:not(.video):after {
-              content: '';
-              background: url('/img/zoom.svg') no-repeat center center;
+            &:after {
+              background: rgba(black, 0.3);
+              border-radius: 35px;
+              content: '\e807';
+              color: $white;
+              font-family: zumwalt;
+              font-size: 1.5rem;
               width: 70px;
               height: 70px;
+              text-align: center;
+              line-height: 70px;
               @include absolute-center;
               z-index: 10;
               opacity: 0;
@@ -1102,7 +1099,42 @@
             @include media-min-small {
               cursor: pointer;
               &:after {
-                opacity: 0.5;
+                opacity: 1;
+              }
+            }
+            
+          }
+        }
+        .example {
+          float: left;
+          position: relative;
+          width: 100%;
+
+          @include media-min-small {
+            &:not(.video):after {
+              background: rgba(black, 0.3);
+              border-radius: 35px;
+              content: '\e807';
+              color: $white;
+              font-family: zumwalt;
+              font-size: 1.5rem;
+              width: 70px;
+              height: 70px;
+              text-align: center;
+              line-height: 70px;
+              @include absolute-center;
+              z-index: 10;
+              opacity: 0;
+              transition: all 0.8s ease;
+            }
+          }
+
+          &:hover {
+
+            @include media-min-small {
+              cursor: pointer;
+              &:after {
+                opacity: 1;
               }
             }
             
@@ -1174,7 +1206,7 @@
 
     .flex-control-nav {
       text-align: center;
-      margin: 1.5em 0 0;
+      margin: 30px 0 0;
 
       li {
         display: inline-block;
@@ -1213,6 +1245,7 @@
         display: block;
         font-family: zumwalt;
         @include vertical-center;
+        top: calc(50% - 26px);
         width: 60px;
         height: 60px;
         border-radius: 30px;

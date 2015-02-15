@@ -303,7 +303,7 @@ jQuery(function ($) {
 
 	// Lightbox
 	// --------------------------------------------------
-	$('.example').each(function () {
+	$('.example, .slide').each(function () {
 		$(this).on('click', function (e) {
 			e.preventDefault();
 			var src = $('img', this).attr('src'),
