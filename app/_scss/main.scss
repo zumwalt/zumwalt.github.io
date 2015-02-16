@@ -27,9 +27,9 @@
 
   	$red_light: #FB7560;
   	$red: #e35b45;
-
-  	$gray_lighter: #fcfcfc;
-  	$gray_light: #ECF0F1;
+  
+    $gray_light: #ECF0F1;
+  	$gray_lighter: lighten($blue_gray_light, 22%);
   	$gray: #c5c1cd;
 
     $black: #222;
@@ -817,7 +817,6 @@
     // --------------------------------------------------
     .recent-work {
       background: $white;
-      border-right: 1px solid $gray_light;
 
       header {
         padding: 3em 0;
@@ -832,6 +831,7 @@
       }
 
       a {
+        border-right: 1px solid $gray_light;
         display: block;
         cursor: pointer;
         text-align: center;
@@ -864,13 +864,35 @@
 
     .projects-open .recent-work {
       //z-index: 600;
+      
+      header {
+        background: $gray_lighter;
+      }
+
       a {
+        background: $gray_lighter;
+
+        & > * {
+          opacity: 0.5;
+        }
+        
+        &:hover {
+          & > * {
+            opacity: 1;
+          }
+        }
+
         &.current {
+          background: $white;
+
+          & > * {
+            opacity: 1;
+          }
 
           @include media-min-medium {
+            border-right: 1px solid $white;
             cursor: default;
-            background: lighten($blue_gray_light, 20%);
-            color: $blue_gray;
+            position: relative;
             transition: all 0.4s 1.3s ease;
 
             & > * {
