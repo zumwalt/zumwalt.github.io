@@ -1,0 +1,41 @@
+---
+layout: case-study
+---
+
+<div class="project" id="preboarding">
+    <div class="return">
+        <a href="#">&larr; Back to Recent Work</a>
+    </div>
+    <header>
+        <h2 class="title">Preboarding</h2>
+        <p class="description">An app for facilitating mood board exercises.</p>
+    </header>
+    <div class="content">
+        <p>My team at Simple Focus often does mood board exercises with clients at the beginning of projects. It serves as a way to create a visual vocabulary when they speak about their brand. What <em>does</em> "clean" actually mean when it comes to&nbsp;design?</p>
+
+        <h3>The problem</h3>
+        <p>As a stakeholder, contributing to a mood board is difficult if you can't be in the room. I find mood boards, and the insight they provide, to be invaluable when I get into the design process, so I wanted to create a solution that allowed remote stakeholders to contribute from anywhere. Why not build an&nbsp;app?</p>
+
+        <h3>My goal</h3>
+        <p>I wanted to build an app that allowed individual users to collaborate in real time with their fellow stakeholders by placing "stickers" on different elements of a mood board. I wanted each sticker to contain the user's initials and a color reflecting their opinion (green for "on brand", red for "off brand", and blue for "aspirational"). I also wanted to be able to watch the exercise unfold in real time in my&nbsp;browser.</p>
+
+        <h3>My process</h3>
+        <img src="/img/projects/preboarding/whiteboard.jpg">
+        <p>I quickly sketched out a few of the core concepts on a whiteboard to get them out of my head. I chose Ruby on Rails as my framework due to its learning curve. I scaffolded out a simple application, added authentication with <a href="https://github.com/plataformatec/devise">Devise</a>, and built a mood board model and its accompanying controllers and views. Using the scaffolded CRUD interface for the mood board model, I added simple file uploading with <a href="https://github.com/thoughtbot/paperclip">Paperclip</a>. To enable real time communication between the different users of the apps, I integrated <a href="https://pusher.com/">Pusher</a> to enable websocket connections between clients.</p>
+
+        <h3>Bringing it together</h3>
+        <p>Contrary to my nature, I saved design for last. I put together a simple UI for the app as a whole, and designed microinteractions for the addition and removal of the "stickers". The app is simple, nimble, and serves its purpose well. With everything in place, I have an interface that allows me to upload mood boards and allows stakeholders to interact with them. I can watch everything happen in real time, take notes, and ask informed questions afterwards. As a result, I'm able to have a clearer understanding of the stakeholders' brand and their expectations before I get too far into the design&nbsp;process.</p>
+    </div>
+    <div class="examples">
+    	<div class="example video">
+    		<iframe src="//player.vimeo.com/video/119037999?autoplay=1&loop=1&color=fb7560&title=0&byline=0&portrait=0" width="500" height="278" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    	</div>
+    </div>
+    <footer>
+        <div class="up-next">
+            <small>Up Next</small>
+            <a href="#project-list"><h2>Project List</h2></a>
+            <p>A marketing site for a team productivity app.</p>
+        </div>
+    </footer>
+</div>

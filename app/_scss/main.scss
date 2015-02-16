@@ -347,7 +347,7 @@
     }
 
     section,
-    .project {
+    .project-frame {
       position: absolute;
       height: 100%;
       top: 0;
@@ -475,7 +475,7 @@
 
       }
 
-      .project {
+      .project-frame {
       
         @include media-max-small {
           top: 60px;
@@ -520,7 +520,7 @@
         }
       }
 
-      .project {
+      .project-frame {
         @include media-max-small {
           left: 0;
         }
@@ -892,13 +892,7 @@
   // --------------------------------------------------
     .project {
       background: $white;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-
-      &.open {
-        opacity: 1;
-        z-index: 301;
-      }
+      display: none;
 
       .return {
         background: $gray_light;

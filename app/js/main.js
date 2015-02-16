@@ -24,104 +24,6 @@ jQuery(function ($) {
 		});
 	};
 
-	// Routin'
-	// --------------------------------------------------
-		// var currentUrl = window.location.href,
-		// 	segments = currentUrl.replace(/\/\s*$/,'').split('/'),
-		// 	pages = new Array();
-
-		// segments.shift();
-
-		// // Get possible pages, add to array
-		// $('.project').each(function () {
-		// 	var id = $(this).attr('id');
-		// 	pages.push('#'+id);
-		// });
-
-		// if(segments[3] === '#about') {
-		// 	if($('main').hasClass('projects-open single-project')) {
-		// 		$('main').removeClass('projects-open single-project');
-		// 	}
-		// }
-		// if(segments[3] === '#recent-work') {
-		// 	if($(window).width() < bpMedium) {
-		// 		if(!$('main').hasClass('projects-open')) {
-		// 			$('main').addClass('projects-open');
-		// 		}
-		// 		if($('main').hasClass('single-project')) {
-		// 			$('main').removeClass('single-project');
-		// 		}
-		// 	} else {
-		// 		if($('main').hasClass('projects-open single-project')) {
-		// 			$('main').removeClass('projects-open single-project');
-		// 		}
-		// 	}
-			
-			
-		// }
-		// if(segments[4]) {
-		// 	var project = segments[4];
-		// 	if(!$('main').hasClass('projects-open single-project')) {
-		// 		$('main').addClass('projects-open single-project');
-		// 	}
-		// 	if(!$(project).hasClass('open')) {
-		// 		$(project).addClass('open');
-		// 	}
-
-		// 	// Load images
-		// 	// --------------------------------------------------
-		// 	$(project).find('img').each(function () {
-		// 		$(this).attr('src', $(this).data('src'));
-		// 	});
-		// }
-
-		// // On hashchange
-		// // --------------------------------------------------
-
-		// $(window).on('hashchange', function () {
-		// 	currentUrl = window.location.href;
-		// 	segments = currentUrl.replace(/\/\s*$/,'').split('/');
-
-		// 	segments.shift();
-
-		// 	if(!segments[3]) {
-		// 		if($('main').hasClass('projects-open single-project')) {
-		// 			$('main').removeClass('projects-open single-project');
-		// 		}
-		// 	}
-
-		// 	if(segments[3] === '#about') {
-		// 		if($('main').hasClass('projects-open single-project')) {
-		// 			$('main').removeClass('projects-open single-project');
-		// 		}
-		// 	}
-		// 	if(segments[3] === '#recent-work') {
-		// 		if($(window).width() < bpMedium) {
-		// 			if(!$('main').hasClass('projects-open')) {
-		// 				$('main').addClass('projects-open');
-		// 			}
-		// 			if($('main').hasClass('single-project')) {
-		// 				$('main').removeClass('single-project');
-		// 			}
-		// 		}
-		// 	}
-		// 	if(segments[4]) {
-		// 		var project = segments[4];
-		// 		if(!$('main').hasClass('projects-open single-project')) {
-		// 			$('main').addClass('projects-open single-project');
-		// 		}
-		// 		if(!$(project).hasClass('open')) {
-		// 			$(project).addClass('open');
-		// 		}
-
-		// 		// Load images
-		// 		// --------------------------------------------------
-		// 		$(project).find('img').each(function () {
-		// 			$(this).attr('src', $(this).data('src'));
-		// 		});
-		// 	}
-		// });
-
 	// Images Loaded yet?
 	// --------------------------------------------------
 	$(document).imagesLoaded(function () {
@@ -190,13 +92,18 @@ jQuery(function ($) {
 	// --------------------------------------------------
 	$('.projects a, .up-next a').on('click', function (e) {
 		e.preventDefault();
-		var project = $(this).attr('href');
+		var frame = $('.project-frame');
+		var project = $(this).data('load');
 		var title = $(project).find('header h2').text();
 
 		// Track those events
 		ga('send', 'event', 'project', 'click', title);
 
-		//window.location.hash = '#recent-work/'+project;
+		if(!$(this).hasClass('current')) {
+			$(this).siblings().removeClass('current');
+			$(this).addClass('current');
+		}
+
 
 		if(!$('main').hasClass('projects-open')) {
 			setTimeout(function () {
@@ -223,23 +130,47 @@ jQuery(function ($) {
 			}
 		}
 		
-		
-		if(!$(project).hasClass('open')) {
-			$('.projects a[href="'+project+'"]').siblings().removeClass('current');
-			$('.projects a[href="'+project+'"]').addClass('current');
-			$(project).siblings().removeClass('open');
+		if(!$('.project', frame).length) {
 			setTimeout(function () {
-				$(project).addClass('open');
-				$(project).find('.slideshow').slideshow();
-			}, 1300);
-			
+				console.log('loaded');
+				frame.load('/case-studies/'+project+'/index.html', function () {
+					loadProject();
+				});
+			}, 1500);
+		} else {
+			if(!$('#'+project).length) {
+				frame.find('.project').fadeOut(500);
+				setTimeout(function () {
+					frame.empty();
+					frame.load('/case-studies/'+project+'/index.html', function () {
+						loadProject();
+					});
+				}, 500);
+			}
 		}
 
-		// Load images
-		// --------------------------------------------------
-		$(project).find('img').each(function () {
-			$(this).attr('src', $(this).data('src'));
-		});
+		function loadProject() {
+			// Load images
+			// --------------------------------------------------
+			$('.project').find('img').each(function () {
+				$(this).attr('src', $(this).data('src'));
+			});
+
+			$('.project').imagesLoaded(function () {
+				$('.project').fadeIn(500);
+
+				// Run the jewels and/or slideshow
+				// --------------------------------------------------
+				$('.slideshow').each(function () {
+					$(this).slideshow();
+				});
+
+				// Fit them vids!
+				// --------------------------------------------------
+				$('.example.video').fitVids();
+			});
+		};
+
 	});
 
 	// Footnotes
@@ -253,7 +184,7 @@ jQuery(function ($) {
 
 	// Close a project
 	// --------------------------------------------------
-	$('.return a').on('click', function (e) {
+	$(document).on('click', '.return a', function (e) {
 		e.preventDefault();
 
 		if($(window).width() >= bpMedium) {
@@ -263,19 +194,21 @@ jQuery(function ($) {
 			//window.location.hash = '#recent-work';
 			$('main').removeClass('single-project');
 		}
+
+		setTimeout(function () {
+			$('.project-frame').empty();
+		}, 1300);
 		
 	});
 
 
-	$('.about').on('click', function () {
-		
-		if($('main').hasClass('projects-open')) {
-			// if($(window).width() >= bpMedium) {
-			// 	window.location.hash = '';
-			// } else {
-			// 	window.location.hash = '#recent-work';
-			// }
-		}
+	$('.about').on('click', function (e) {
+		e.preventDefault();
+
+		$('.project').fadeOut(500);
+		setTimeout(function () {
+			$('.project-frame').empty();
+		}, 500);
 
 		if($(window).width() >= bpSmall) {
 
@@ -307,49 +240,47 @@ jQuery(function ($) {
 
 	// Lightbox
 	// --------------------------------------------------
-	$('.example, .slide').each(function () {
-		$(this).on('click', function (e) {
-			e.preventDefault();
-			var src = $('img', this).attr('src'),
-				full = $('img', this).attr('data-full');
+	$(document).on('click', '.example, .slide', function (e) {
+		e.preventDefault();
+		var src = $('img', this).attr('src'),
+			full = $('img', this).attr('data-full');
 
-			if($(window).width() >= bpSmall) {
+		if($(window).width() >= bpSmall) {
 
-				var image = new Image();
+			var image = new Image();
 
-			    $('body').addClass('fixed');
-				$('<div class="overlay"><div class="loading"></div></div><div class="lightbox"></div>').insertAfter($('.wrapper'));
+		    $('body').addClass('fixed');
+			$('<div class="overlay"><div class="loading"></div></div><div class="lightbox"></div>').insertAfter($('.wrapper'));
 
-			   	if(full) {
-			   		image.src = full;
-			   	} else {
-			   		image.src = src;
-			   	}
-			    
-			    image.onload = function () {
-			        $('.lightbox').empty().append(image);
-			        setTimeout(function () {
-			        	$('.overlay .loading').css('opacity', 0);
-						$('.lightbox').addClass('open');
-					}, 300);
-			    };
-			    image.onerror = function () {
-			        $('.lightbox').empty().html('That image is not available.');
-			    }				
+		   	if(full) {
+		   		image.src = full;
+		   	} else {
+		   		image.src = src;
+		   	}
+		    
+		    image.onload = function () {
+		        $('.lightbox').empty().append(image);
+		        setTimeout(function () {
+		        	$('.overlay .loading').css('opacity', 0);
+					$('.lightbox').addClass('open');
+				}, 300);
+		    };
+		    image.onerror = function () {
+		        $('.lightbox').empty().html('That image is not available.');
+		    }				
 
-			    return false;
+		    return false;
+		} else {
+			var url;
+			if(full) {
+				url = full;
 			} else {
-				var url;
-				if(full) {
-					url = full;
-				} else {
-					url = src;
-				}
-				window.open(url, '_blank');
+				url = src;
 			}
-			
-		});
+			window.open(url, '_blank');
+		}
 	});
+
 	$(document).on('click', '.lightbox', function () {
 		$('body').removeClass('fixed');
 		$('.lightbox').removeClass('open');
@@ -360,7 +291,4 @@ jQuery(function ($) {
 		}, 600);
 	});
 
-	// Preboardin'
-	// --------------------------------------------------
-	$('#preboarding .example').fitVids();
 });
