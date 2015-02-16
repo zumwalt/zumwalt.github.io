@@ -132,7 +132,6 @@ jQuery(function ($) {
 		
 		if(!$('.project', frame).length) {
 			setTimeout(function () {
-				console.log('loaded');
 				frame.load('/case-studies/'+project+'/index.html', function () {
 					loadProject();
 				});
@@ -150,6 +149,7 @@ jQuery(function ($) {
 		}
 
 		function loadProject() {
+			$('.project-frame').append('<div class="loading"/>');
 			// Load images
 			// --------------------------------------------------
 			$('.project').find('img').each(function () {
@@ -158,6 +158,7 @@ jQuery(function ($) {
 
 			$('.project').imagesLoaded(function () {
 				$('.project').fadeIn(500);
+				$('.project-frame .loading').fadeOut(1000);
 
 				// Run the jewels and/or slideshow
 				// --------------------------------------------------
