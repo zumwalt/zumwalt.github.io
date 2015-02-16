@@ -24,6 +24,30 @@ jQuery(function ($) {
 		});
 	};
 
+	function loadProject() {
+		$('.project-frame').append('<div class="loading"/>');
+		// Load images
+		// --------------------------------------------------
+		$('.project').find('img').each(function () {
+			$(this).attr('src', $(this).data('src'));
+		});
+
+		$('.project').imagesLoaded(function () {
+			$('.project').fadeIn(500);
+			$('.project-frame .loading').fadeOut(1000);
+
+			// Run the jewels and/or slideshow
+			// --------------------------------------------------
+			$('.slideshow').each(function () {
+				$(this).slideshow();
+			});
+
+			// Fit them vids!
+			// --------------------------------------------------
+			$('.example.video').fitVids();
+		});
+	};
+
 	// Images Loaded yet?
 	// --------------------------------------------------
 	$(document).imagesLoaded(function () {
@@ -37,12 +61,12 @@ jQuery(function ($) {
 
 	// Show me mobile navigation, Bob!
 	// --------------------------------------------------
-	$('a[href="#recent-work"]').on('click', function (e) {
+	$('a[href="#case-studies"]').on('click', function (e) {
 		e.preventDefault();
 		e.stopPropagation();
 		
 		if($(window).width() < bpMedium) {
-			//window.location.hash = '#recent-work';
+			//window.location.hash = '#case-studies';
 			$('main').addClass('projects-open');
 			$(this).siblings().removeClass('current');
 			$(this).addClass('current');
@@ -148,30 +172,30 @@ jQuery(function ($) {
 			}
 		}
 
-		function loadProject() {
-			$('.project-frame').append('<div class="loading"/>');
-			// Load images
-			// --------------------------------------------------
-			$('.project').find('img').each(function () {
-				$(this).attr('src', $(this).data('src'));
+	});
+
+	$(document).on('click', '.up-next a', function (e) {
+		console.log('click')
+		e.preventDefault();
+		var frame = $('.project-frame');
+		var project = $(this).data('load');
+		var title = $(project).find('header h2').text();
+
+		// Track those events
+		ga('send', 'event', 'project', 'click', title);
+
+		// Current nav
+		$('.recent-work a').removeClass('current');
+		$('a[data-load="'+project+'"]').addClass('current');
+
+		// Load the case study
+		frame.find('.project').fadeOut(500);
+		setTimeout(function () {
+			frame.empty();
+			frame.load('/case-studies/'+project+'/index.html', function () {
+				loadProject();
 			});
-
-			$('.project').imagesLoaded(function () {
-				$('.project').fadeIn(500);
-				$('.project-frame .loading').fadeOut(1000);
-
-				// Run the jewels and/or slideshow
-				// --------------------------------------------------
-				$('.slideshow').each(function () {
-					$(this).slideshow();
-				});
-
-				// Fit them vids!
-				// --------------------------------------------------
-				$('.example.video').fitVids();
-			});
-		};
-
+		}, 500);
 	});
 
 	// Footnotes
@@ -192,7 +216,7 @@ jQuery(function ($) {
 			//window.location.hash = '';
 			$('main').removeClass('projects-open');
 		} else {
-			//window.location.hash = '#recent-work';
+			//window.location.hash = '#case-studies';
 			$('main').removeClass('single-project');
 		}
 
@@ -224,8 +248,8 @@ jQuery(function ($) {
 
 				$('main').removeClass('projects-open single-project');
 
-				if($('a[href="#recent-work"]').hasClass('current')) {
-					$('a[href="#recent-work"]').removeClass('current');
+				if($('a[href="#case-studies"]').hasClass('current')) {
+					$('a[href="#case-studies"]').removeClass('current');
 					$('a[href="#about"]').addClass('current');
 				}
 
