@@ -547,6 +547,7 @@
 
       @include media-min-small {
         padding: 41px;
+
       }
 
       header {
@@ -865,21 +866,32 @@
     .projects-open .recent-work {
       //z-index: 600;
       
-      header {
-        background: $gray_lighter;
+      header {   
+        @include media-min-medium {
+          background: $gray_lighter;
+        }
       }
 
       a {
-        background: $gray_lighter;
+        
 
-        & > * {
-          opacity: 0.5;
+        @include media-min-medium {
+          background: $gray_lighter;
+          
+          & > * {
+            opacity: 0.5;
+          }
         }
         
+        
         &:hover {
-          & > * {
-            opacity: 1;
+
+          @include media-min-medium {
+            & > * {
+              opacity: 1;
+            }
           }
+          
         }
 
         &.current {
