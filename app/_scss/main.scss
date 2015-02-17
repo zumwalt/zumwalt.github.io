@@ -546,7 +546,7 @@
       padding: 30px;
 
       @include media-min-small {
-        padding: 75px;
+        padding: 41px;
       }
 
       header {
@@ -574,7 +574,7 @@
         }
           
         @include media-min-small {
-          top: 75px;
+          top: 41px;
           right: calc(((100% - 350px) / 2) + 320px);
           transition: 
             left 0s 0.5s linear,
@@ -792,7 +792,7 @@
         }
 
         @include media-min-small {
-          top: 75px;
+          top: 41px;
           left: auto;
           right: 32px;
         }
