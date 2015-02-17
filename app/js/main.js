@@ -114,7 +114,7 @@ jQuery(function ($) {
 
 	// Divin' into a project
 	// --------------------------------------------------
-	$('.projects a, .up-next a').on('click', function (e) {
+	$('.projects a').on('click', function (e) {
 		e.preventDefault();
 		var frame = $('.project-frame');
 		var project = $(this).data('load');
@@ -175,7 +175,6 @@ jQuery(function ($) {
 	});
 
 	$(document).on('click', '.up-next a', function (e) {
-		console.log('click')
 		e.preventDefault();
 		var frame = $('.project-frame');
 		var project = $(this).data('load');
@@ -186,7 +185,7 @@ jQuery(function ($) {
 
 		// Current nav
 		$('.recent-work a').removeClass('current');
-		$('a[data-load="'+project+'"]').addClass('current');
+		$('.recent-work a[data-load="'+project+'"]').addClass('current');
 
 		// Load the case study
 		frame.find('.project').fadeOut(500);
@@ -196,6 +195,11 @@ jQuery(function ($) {
 				loadProject();
 			});
 		}, 500);
+
+		// Scroll the project links to the appropriate place
+		// if($(window).width() >= bpMedium) {
+  //         $('.recent-work').scrollTo('a[data-load="'+project+'"]',{duration:3000});
+  //       }
 	});
 
 	// Footnotes
@@ -293,7 +297,7 @@ jQuery(function ($) {
 					$('.lightbox').addClass('open');
 				}, 300);
 		    };
-		    
+
 		    image.onerror = function () {
 		        $('.lightbox').empty().html('That image is not available.');
 		    }				
