@@ -261,6 +261,9 @@ jQuery(function ($) {
 		}
 	});
 
+	$('.about a').on('click', function (e) {
+		e.stopPropagation();
+	});
 
 
 	// Lightbox
@@ -290,12 +293,15 @@ jQuery(function ($) {
 					$('.lightbox').addClass('open');
 				}, 300);
 		    };
+		    
 		    image.onerror = function () {
 		        $('.lightbox').empty().html('That image is not available.');
 		    }				
 
 		    return false;
+
 		} else {
+
 			var url;
 			if(full) {
 				url = full;
@@ -303,6 +309,7 @@ jQuery(function ($) {
 				url = src;
 			}
 			window.open(url, '_blank');
+
 		}
 	});
 
